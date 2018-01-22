@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Find Me A Strain</title>
+    <%- include('modules/dependencies.ejs') %>
+        <link rel="stylesheet" href="style/index.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/card.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/reset.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/grid.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/container.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/checkbox.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/label.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/input.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/icon.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/form.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/button.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
+
+</head>
+
+<body>
+    <%- include('modules/header.ejs'); %>
+        <div class="page">
+            <div class="search-container">
+                <div class="search">
+                    <form @submit.prevent="search" id="search">
+                        <div class="effects ">
+                            <h1>I want to feel..</h1>
+                            <div class="checkboxes ui stackable grid">
+                                <% for (i=0; i < effects.length;i++) { %>
+                                    <% if (i == 6) { %>
+                                        <div class="view-more ui stackable grid" v-bind:class="{hidden:!view_more}">
+                                            <% } %>
+                                                <div class="four wide column">
+                                                    <div class="effect pretty p-default p-success">
+                                                        <input type="checkbox" name="<%- effects[i].name %>">
+                                                        <div class="state p-primary">
+                                                            <label>
+                                                                <%- effects[i].name + '(' + effects[i].count + ')' %>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                                                    <% if (effects.length >= 6 ) { %>
+                                        </div>
+                                        <a @click="toggle_more" v-if="!view_more" class="effect-toggle more">
+                                            View More
+                                            <i class="ui icon Angle Double Right"></i>
+                                        </a>
+                                        <a @click="toggle_more" v-if="view_more" class="effect-toggle less">
+                                            <i class="ui icon Angle Double Left"></i>
+                                            Show Less
+                                        </a>
+                                        <% } %>
+
+                            </div>
+                        </div>
+                        <div class="find">
+                            <button class=" ui button fluid massive">Find Me A Strain!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="strain-area">
+                <div class="ui container ">
+                    <div class="top-strains">
+                        <div class="ui grid three column stackable">
+                            <% for (i=0;i<top_strains.length;i++) { %>
+                                <div class="column ">
+                                    <a href="/strain/<%- top_strains[i].name %>">
+                                        <div class="strain-card <%- top_strains[i].race %>">
+                                            <div class="race">
+                                                <%- top_strains[i].race.charAt(0).toUpperCase() + top_strains[i].race.slice(1) %>
+                                            </div>
+                                            <div class="name">
+                                                <%- top_strains[i].name %>
+                                            </div>
+                                            <div class="strain-effects">
+                                                <% for (e=0;e < top_strains[i].effects.positive.length;e++) { %>
+                                                    <div class="ui label effect ">
+                                                        <%- top_strains[i].effects.positive[e] %>
+                                                    </div>
+                                                    <%  } %>
+                                            </div>
+                                            <div class="stats">
+                                                <i class="icon thumbs up"></i>
+                                                <%- top_strains[i].votes %> Votes
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="strain-categories">
+                <h1>Browse By Type</h1>
+                <div>
+                    <div class="ui three column stackable grid">
+                        <div class="column">
+                            <a href="/browse?race=indica">
+                                <div class="strain-category indica">
+                                    <h1>Indica</h1>
+                                </div>
+                            </a>
+
+                        </div>
+                        <div class="column">
+                            <a href="/browse?race=sativa">
+                                <div class="strain-category sativa">
+                                    <h1>Sativa</h1>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="column">
+                            <a href="/browse?race=hybrid">
+                                <div class="strain-category hybrid">
+                                    <h1>Hybrid</h1>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('modules/footer.ejs') %>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+<script>
+    new Vue({
+        el: '.search-container',
+        data: { view_more: false },
+        methods: {
+            toggle_more: function () {
+                this.view_more = !this.view_more;
+            },
+            search: function () {
+                var checkboxes = document.getElementById('search').elements;
+                var effects = '';
+                for (i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        effects += checkboxes[i].name + ",";
+                    }
+                }
+                effects = effects.substring(0, effects.length - 1);
+                window.location = "/browse?effects=" + effects
+            }
+        }
+    })
+
+</script>
+<script src="js/script.js"></script>
+
+</html>

@@ -1,0 +1,129 @@
+@import "https://fonts.googleapis.com/css?family=Roboto";
+$color-secondary-1: #4bb3fd;
+$color-secondary-2: #f87060;
+$color-secondary-3: #00a878;
+$color-secondary-4: #827191;
+$color-secondary-5: #44af69;
+$color-secondary-6: #839be2;
+$color-secondary-7: #3666c4;
+$color-secondary-8: #c04949;
+$color-primary: #eef8ff;
+$color-primary-1: #071013;
+$color-primary-2: #fbf5f3;
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+@mixin box-shadow($args...) {
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  box-shadow: $args;
+}
+* {
+  font-family: "Roboto", sans-serif;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  content: "";
+  clear: both;
+  height: 0;
+}
+.site-header {
+  position: fixed;
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  padding-left: 2rem;
+  z-index: 999999;
+  border-bottom: 1px solid white;
+  background-color: none;
+  @include transition(background-color 1s);
+  .title {
+    display: inline-block;
+    padding: 1rem;
+    border: 2px solid $color-primary;
+    color: white;
+    h1 {
+      display: inline-block;
+      font-size: 1.5rem;
+      font-weight: bolder;
+      color: inherit;
+      margin: 0;
+    }
+    &:hover {
+      color: transparent;
+      color: $color-primary-1;
+      background-color: $color-primary;
+    }
+  }
+  .items {
+    position: relative;
+    display: inline-block;
+    float: right;
+    .item {
+      display: inline-block;
+      padding: 1rem;
+      margin-right: 1rem;
+      border: 2px solid $color-primary;
+      color: white;
+      font-weight: bolder;
+      text-decoration: none;
+      &:hover {
+        color: transparent;
+        color: $color-primary-1;
+        background-color: $color-primary;
+      }
+    }
+  }
+  &.scrolling {
+    background-color: rgba($color-primary-1, 0.9);
+  }
+}
+.site-footer {
+  position: relative;
+  display: block;
+  width: 100%;
+  bottom: 0;
+  margin-top: -1.1rem;
+  background-color: $color-primary-1;
+  color: $color-primary;
+}
+.page {
+  position: relative;
+  display: block;
+  min-height: 100vh;
+  height: auto;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+  background-color: $color-secondary-1;
+}
+body .page .ui.grid.stackable {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-right: 0;
+  padding-left: 0;
+}
+@media screen and (max-width: 768px) {
+  .site-header {
+    padding: 0;
+    padding-bottom: 1rem;
+    .title {
+      margin: 1rem;
+    }
+    .items {
+      margin: 0 auto;
+      margin-top: 0.5rem;
+      display: block;
+
+      margin-left: 1rem;
+    }
+  }
+  .page {
+    padding-top: 12rem;
+  }
+}

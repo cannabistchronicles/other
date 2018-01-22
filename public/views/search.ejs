@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <title>
+        Search for a Strain - FindMeAStrain.com
+    </title>
+    <%- include('modules/dependencies.ejs') %>
+        <link rel="stylesheet" href="style/search.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/container.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/reset.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/grid.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/label.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/input.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/button.min.css">
+</head>
+
+<body>
+    <%- include('modules/header.ejs') %>
+        <div class="page">
+            <div class="ui container">
+
+                <div class="search-results ui grid stackable">
+                    <h1 class="sixteen wide column">Search Results</h1>
+                    <div class="search sixteen wide column">
+                        <form method="get">
+                            <div class="ui form">
+                                <div class="ui input">
+                                    <input name="query" type="text" placeholder="Search..." value="<%- (query.name) ? query.name : '' %>">
+                                </div>
+                                <button class="ui button">
+                                    Search
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <% for (i=0;i<strains.length;i++) { %>
+
+                        <div class="column four wide computer five wide tablet sixteen wide mobile">
+                            <a href="/strain/<%- strains[i].name %>">
+                                <div class="strain-card <%- strains[i].race %>">
+                                    <div class="race">
+                                        <%- strains[i].race.charAt(0).toUpperCase() + strains[i].race.slice(1) %>
+                                    </div>
+                                    <div class="name">
+                                        <%- strains[i].name %>
+                                    </div>
+                                    <div class="strain-effects">
+                                        <% for (e=0;e < strains[i].effects.positive.length;e++) { %>
+                                            <div class="ui label effect grey">
+                                                <%- strains[i].effects.positive[e] %>
+                                            </div>
+                                            <%  } %>
+                                    </div>
+                                    <div class="stats">
+                                        <i class="icon thumbs up"></i>
+                                        <%- strains[i].votes %> Votes
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <% } %>
+                            <div class="navigation">
+                                <a class="ui button previous">Previous Page</a>
+                                <a class="ui button next">Next Page</a>
+                            </div>
+                </div>
+            </div>
+        </div>
+</body>
+<script src="js/script.js"></script>

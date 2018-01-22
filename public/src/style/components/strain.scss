@@ -1,0 +1,52 @@
+@import "../style.scss";
+$color-indica: $color-secondary-4;
+$color-sativa: $color-secondary-5;
+$color-hybrid: $color-secondary-7;
+.strain-card {
+  position: relative;
+  display: inline-block;
+  color: $color-primary;
+  background-color: $color-primary-1;
+  padding: 1rem;
+  top: 0;
+  @include transition(top 0.5s);
+  @include box-shadow(25px 30px 51px 0px rgba(0,0,0,0.75));
+
+  .name {
+    font-size: 2rem;
+  }
+  .race {
+    position: relative;
+    float: right;
+    top: -1rem;
+    left: 1rem;
+    padding: 0.5rem;
+    border-width: 0px 0px 1px 1px;
+    background-color: $color-secondary-2 - 20;
+  }
+  .effect.label {
+    margin-top: 0.5rem;
+    font-size: 0.7em;
+    background-color: $color-primary-1;
+    color: white;
+  }
+  .stats {
+    position: relative;
+    top: 0.5rem;
+    float: right;
+    left: 0.5rem;
+  }
+  &:hover {
+    top: -10px;
+  }
+}
+
+.indica {
+  background-color: $color-indica;
+}
+.sativa {
+  background-color: $color-sativa;
+}
+.hybrid {
+  background-color: $color-hybrid;
+}

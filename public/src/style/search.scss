@@ -1,0 +1,39 @@
+@import "style.scss";
+@import "components/strain.scss";
+.page {
+  .search-results.stackable.grid.ui {
+    padding-bottom: 2rem;
+    padding-top: 0rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: $color-primary-1 + 30;
+    h1 {
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .navigation {
+    padding: 1rem;
+    padding-top: 2rem;
+    .next {
+      float: right;
+    }
+    .pages {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-top: 1px solid white;
+      .navlink {
+        padding: 0.2rem;
+        color: white;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+.search {
+}

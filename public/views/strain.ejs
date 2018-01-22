@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <%- include('modules/dependencies.ejs') %>
+        <link rel="stylesheet" href="/style/strain.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/reset.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/label.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/icon.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/container.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/grid.min.css">
+</head>
+
+<body>
+    <%- include('modules/header.ejs') %>
+        <div class="page">
+            <div class="strain <%- strain.race %>">
+                <div class="race">
+                    <%- strain.race.charAt(0).toUpperCase() + strain.race.slice(1) %>
+                </div>
+                <div class="details">
+                    <h1>
+                        <%- strain.name %>
+                    </h1>
+                    <div class="flavours">
+                        <% for (i=0;i<strain.flavors.length;i++) { %>
+                            <div class="ui label">
+                                <%- strain.flavors[i] %>
+                            </div>
+                            <% } %>
+                    </div>
+                    <div class="ui grid three column stackable categories">
+                        <div class="column effect-category">
+                            <h3>
+                                <i class="ui icon blue leaf"></i>Benefits</h3>
+                            <ul class="effect-list">
+                                <% for(i=0;i<strain.effects.positive.length;i++) { %>
+                                    <li class="effect">
+                                        <%- strain.effects.positive[i] %>
+                                    </li>
+                                    <% }%>
+                            </ul>
+                        </div>
+                        <div class="column effect-category">
+                            <h3>
+                                <i class="ui icon red first aid"></i>Medical</h3>
+                            <ul class="effect-list">
+                                <% for(i=0;i<strain.effects.medical.length;i++) { %>
+                                    <li class="effect">
+                                        <%- strain.effects.medical[i] %>
+                                    </li>
+                                    <% } %>
+                            </ul>
+                        </div>
+                        <div class="column effect-category">
+                            <h3>
+                                <i class="ui icon yellow wait"></i>Side Effects</h3>
+                            <ul class="effect-list">
+                                <% for(i=0;i<strain.effects.negative.length;i++) { %>
+                                    <li class="effect">
+                                        <%- strain.effects.negative[i] %>
+                                    </li>
+                                    <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="related-strains">
+                    <div class="ui three column grid stackable">
+
+                        <% for (i=0;i<related_strains.length;i++) { %>
+                            <div class="column  ">
+                                <a href="<%- related_strains[i].name %>">
+                                    <div class="strain-card <%- related_strains[i].race %>">
+                                        <div class="race">
+                                            <%- related_strains[i].race.charAt(0).toUpperCase() + related_strains[i].race.slice(1) %>
+                                        </div>
+                                        <div class="name">
+                                            <%- related_strains[i].name %>
+                                        </div>
+                                        <div class="strain-effects">
+                                            <% for (e=0;e < related_strains[i].effects.positive.length;e++) { %>
+                                                <div class="ui label effect ">
+                                                    <%- related_strains[i].effects.positive[e] %>
+                                                </div>
+                                                <%  } %>
+                                        </div>
+                                        <div class="stats">
+                                            <i class="icon thumbs up"></i>
+                                            <%- related_strains[i].votes %> Votes
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
+                <div class="comment-area">
+                    <div class="ui unstackable items">
+                        <% for (i=0;i<comments.length;i++) { %>
+                            <div class="item">
+                                <div class="content">
+                                    <a class="header">
+                                        <%- comment[i].name %>
+                                    </a>
+                                    <div class="meta">
+                                        <span>Description</span>
+                                    </div>
+                                    <div class="description">
+                                        <p></p>
+                                    </div>
+                                    <div class="extra">
+                                        Additional Details
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('modules/footer.ejs') %>
+</body>
+<script src="../js/script.js"></script>
+
+</html>

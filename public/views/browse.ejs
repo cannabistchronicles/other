@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <%- include('modules/dependencies.ejs') %>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/reset.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/container.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/grid.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/label.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/button.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
+        <link rel="stylesheet" href="style/browse.css">
+</head>
+
+<body>
+    <%- include('modules/header.ejs') %>
+        <div class="page">
+            <div class="ui container">
+                <section class="all-strains">
+                    <div class="filter">
+                        <h1>Browse Strains (
+                            <%- count %> found)</h1>
+                        <div class="strain-filter indica">
+                            <div class=" effect pretty p-default p-">
+                                <input type="checkbox" <%- (filter.race && filter.race.includes( "indica")) ? "checked" : "" %>>
+                                <div class="state p-warning">
+                                    <label>Indica</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="strain-filter sativa">
+                            <div class=" effect pretty p-default p-success">
+                                <input type="checkbox" <%- (filter.race && filter.race.includes( "sativa")) ? "checked" : "" %>>
+                                <div class="state p-warning">
+                                    <label>Sativa</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="strain-filter hybrid">
+                            <div class=" effect pretty p-default p-success">
+                                <input type="checkbox" <%- (filter.race && filter.race.includes( "hybrid")) ? "checked" : "" %>>
+                                <div class="state p-warning">
+                                    <label>Hybrid</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui grid ">
+                        <% for (i=0;i<strains.length;i++) { %>
+                            <div class="column four wide computer five wide tablet sixteen wide mobile">
+                                <a href="/strain/<%- strains[i].name %>">
+                                    <div class="strain-card <%- strains[i].race %>">
+                                        <div class="race">
+                                            <%- strains[i].race.charAt(0).toUpperCase() + strains[i].race.slice(1) %>
+                                        </div>
+                                        <div class="name">
+                                            <%- strains[i].name %>
+                                        </div>
+                                        <div class="strain-effects">
+                                            <% for (e=0;e < strains[i].effects.positive.length;e++) { %>
+                                                <div class="ui label effect ">
+                                                    <%- strains[i].effects.positive[e] %>
+                                                </div>
+                                                <%  } %>
+                                        </div>
+                                        <div class="stats">
+                                            <i class="icon thumbs up"></i>
+                                            <%- strains[i].votes %> Votes
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <% } %>
+                    </div>
+                    <div class="navigation clearfix">
+                        <% if (filter.page > 1) { %>
+                            <a class="ui button" href="/browse?<%- (filter.race ? 'race=' + filter.race : ''
+                            ) + '&page=' + (filter.page - 1)  + (filter.effects ? '&effects=' + filter.effects : '') %>">Previous Page</a>
+                            <% } %>
+                                <div class="info">
+                                    Displaying Results
+                                    <%- ((filter.page - 1) * filter.limit) %> to
+                                        <%- ((filter.page * filter.limit)) %>
+                                </div>
+                                <% if ((filter.page * filter.limit) < count) { console.log(filter)%>
+                                    <a class="ui button next" href="/browse?<%- (filter.race ? 'race=' + filter.race : ''
+                    ) + '&page=' + (filter.page + 1)  + (filter.effects ? '&effects=' + filter.effects : '') %>">Next Page</a>
+                                    <% } %>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <%- include('modules/footer.ejs') %>
+</body>
+<script src="js/script.js"></script>

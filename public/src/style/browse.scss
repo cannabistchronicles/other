@@ -1,0 +1,49 @@
+@import "components/strain";
+@import "style";
+.all-strains {
+  background-color: $color-primary-1 + 30;
+  color: white;
+  padding: 2rem;
+  .filter {
+    .strain-filter {
+      display: inline-block;
+      padding: 1rem;
+    }
+    padding-bottom: 1rem;
+    border-bottom: 2px solid white;
+    margin-bottom: 1rem;
+  }
+  .navigation {
+    margin: 2rem;
+    margin-bottom: 0;
+    .next {
+      float: right;
+      margin-top: -4rem;
+    }
+    .info {
+      position: relative;
+      display: block;
+      text-align: center;
+      top: -1.5em;
+    }
+    .previous {
+      float: left;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .navigation {
+    > * {
+      position: relative;
+      display: block !important;
+      float: none !important;
+    }
+    .info {
+      top: 0 !important;
+      margin: 0.5rem;
+    }
+    .next {
+      margin-top: 0 !important;
+    }
+  }
+}

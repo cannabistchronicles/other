@@ -1,0 +1,73 @@
+@import "style";
+@import "components/strain";
+
+.strain {
+  position: relative;
+  display: block;
+  margin: 2rem;
+  width: calc(100% - 4rem);
+  max-width: 800px;
+  margin: 0 auto;
+  color: $color-primary-2;
+  border: 3px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+  &.indica {
+    .effect-category {
+      border-color: $color-indica !important;
+    }
+  }
+  &.sativa {
+    .effect-category {
+      border-color: $color-sativa !important;
+    }
+  }
+  &.hybrid {
+    .effect-category {
+      border-color: $color-hybrid !important;
+    }
+  }
+  &.indica {
+    .effect-category {
+      border-color: $color-indica;
+    }
+  }
+  > .race {
+    position: relative;
+    float: right;
+    padding: 1rem;
+    border-width: 0px 0px 1px 1px;
+    background-color: $color-secondary-2 - 20;
+  }
+  .details {
+    padding: 2rem;
+    .categories {
+      position: relative;
+      background-color: $color-primary-2;
+      color: $color-primary-1;
+    }
+    .effect-category {
+      text-align: center;
+      border: 2px solid;
+      border-width: 0 2px 0 0;
+      &:last-of-type {
+        border-width: none;
+      }
+      .effect-list {
+        list-style: none;
+        padding: 0;
+      }
+    }
+    .flavours {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+  }
+}
+.related-strains {
+  background-color: $color-primary-1 + 20;
+  width: 100%;
+  padding: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
